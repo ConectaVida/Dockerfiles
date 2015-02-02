@@ -1,6 +1,6 @@
 # How to use this image
 
-You just run this command below and see the magic done:
+You just need run this command below to see the magic happen:
 
 > docker run --name firefox -e DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix rzani/firefox
 
