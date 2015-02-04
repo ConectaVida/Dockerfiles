@@ -35,11 +35,6 @@ RUN a2enmod rewrite && /etc/init.d/apache2 restart
 RUN sed -i "s/display_errors = Off/display_errors = On/" /etc/php5/apache2/php.ini
 RUN sed -i "s/html_errors = Off/html_errors = On/" /etc/php5/apache2/php.ini
 
-ENV HOST_DESKTOP dev.cybercook.com.br
-ENV HOST_MOBILE dev.m.cybercook.com.br
-ENV DOCROOT /var/www/html
-ENV APPNAME cybercook
-
 COPY ./entrypoint.sh /
 # ===|=== my docker version (1.14) have a bug ()
 RUN chmod 0777 /entrypoint.sh

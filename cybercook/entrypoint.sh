@@ -1,12 +1,33 @@
 #!/bin/bash
 set -e
 
+if [ -z ${SERVERNAME} ]; then
+	SERVERNAME="dev.cybercook.com.br"
+fi
+
+if [ -z ${SERVERALIAS} ]; then
+	SERVERALIAS="dev.m.cybercook.com.br"
+fi
+
+if [ -z ${DOCROOT} ]; then
+	DOCROOT="/var/www/html"
+fi
+
+if [ -z ${APPNAME} ]; then
+	APPNAME="cybercook"
+fi
+
 APACHECONF="/etc/apache2/sites-available/$APPNAME.conf"
 
+if [ -f "$APACHECONF" ]; then
+	rm $APACHECONF
+fi
+
 cat > "$APACHECONF" <<-EOCONF
+	ServerName localhost
 	<VirtualHost *:80>
-	    ServerName ${HOST_DESKTOP}
-	    ServerAlias ${HOST_MOBILE}
+	    ServerName ${SERVERNAME}
+	    ServerAlias ${SERVERALIAS}
 	    AddDefaultCharset UTF-8
 	    DocumentRoot '${DOCROOT}'
 	     <Directory '${DOCROOT}'>
@@ -20,6 +41,6 @@ cat > "$APACHECONF" <<-EOCONF
 	</VirtualHost>
 EOCONF
 
-service apache2 restart
+/usr/sbin/a2ensite "$APPNAME" && service apache2 stop
 
 exec "$@"
