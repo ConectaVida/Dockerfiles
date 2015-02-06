@@ -1,5 +1,5 @@
 #
-# CyberCook Dockerfile - PHP 5.6
+# Apache Dockerfile - PHP 5.6
 # 
 # https://github.com/rzani/Dockerfiles
 #
